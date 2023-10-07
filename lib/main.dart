@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_new
 
 import 'dart:async';
+import 'dart:ui';
 import 'package:geolocator/geolocator.dart';
 import 'package:fire_archive/location_service.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:csv/csv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:fire_archive/Navbar.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -131,7 +132,10 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: myappbar(),
+      drawer: NavBar(),
+      appBar: AppBar(
+        title: Text("FireArchive"),
+      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -142,7 +146,7 @@ class MapSampleState extends State<MapSample> {
                   children: [
                     TextFormField(
                       controller: _locationController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.all(15),
@@ -155,7 +159,7 @@ class MapSampleState extends State<MapSample> {
                         padding: const EdgeInsets.all(8),
                         child: SvgPicture.asset(
                           'assets/icons/loc-1.svg',
-                          colorFilter: const ColorFilter.mode(Color.fromARGB(255, 109, 107, 106), BlendMode.srcIn),
+                          colorFilter:  ColorFilter.mode(Color.fromARGB(255, 109, 107, 106), BlendMode.srcIn),
                           ),
                         ),
                         border: OutlineInputBorder(
@@ -180,18 +184,18 @@ class MapSampleState extends State<MapSample> {
               ),
               IconButton(
                 onPressed: () async {
-                  var directions = await LocationService().getDirections(
-                    _originController.text,
-                    _destinationController.text,
-                  );
-                  _goToPlace(
-                    directions['start_location']['lat'],
-                    directions['start_location']['lng'],
-                    directions['bounds_ne'],
-                    directions['bounds_sw'],
-                  );
+                  // var directions = await LocationService().getDirections(
+                  //   _originController.text,
+                  //   _destinationController.text,
+                  // );
+                  // _goToPlace(
+                  //   directions['start_location']['lat'],
+                  //   directions['start_location']['lng'],
+                  //   directions['bounds_ne'],
+                  //   directions['bounds_sw'],
+                  // );
 
-                  _setPolyline(directions['polyline_decoded']);
+                  // _setPolyline(directions['polyline_decoded']);
                 },
               icon: const Icon(Icons.search),
               ),
@@ -225,7 +229,7 @@ class MapSampleState extends State<MapSample> {
       title: 
         const Text('FireArchive🔥', 
         style: TextStyle(
-          color: Colors.black,
+          color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.bold
         )),
